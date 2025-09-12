@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apache Web Server</title>
+  <style>
+    /* Reset and base styles for consistent rendering across browsers */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* Main body styling with dark theme and smooth animations */
+    body {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+      color: #ff6600;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Animated background particles effect */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(255, 102, 0, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 102, 0, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 80%, rgba(255, 102, 0, 0.08) 0%, transparent 50%);
+      animation: backgroundPulse 8s ease-in-out infinite;
+      z-index: -1;
+    }
+    
+    /* Container for main content with glassmorphism effect */
+    .container {
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 102, 0, 0.2);
+      border-radius: 20px;
+      padding: 60px 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                  0 0 60px rgba(255, 102, 0, 0.1);
+      position: relative;
+      max-width: 600px;
+      width: 90%;
+      animation: containerFloat 6s ease-in-out infinite;
+    }
+    
+    /* Main heading with enhanced styling and animations */
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #ff6600, #ff8833, #ffaa66, #ff6600);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate;
+      text-shadow: 0 0 30px rgba(255, 102, 0, 0.5);
+    }
+    
+    /* Subtitle with subtle styling */
+    .subtitle {
+      font-size: 1.2rem;
+      color: #cccccc;
+      margin-bottom: 40px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      opacity: 0.9;
+    }
+    
+    /* Technology stack badges container */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    /* Individual technology badges with hover effects */
+    .tech-badge {
+      background: linear-gradient(135deg, rgba(255, 102, 0, 0.2), rgba(255, 102, 0, 0.1));
+      border: 1px solid rgba(255, 102, 0, 0.3);
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #ff6600;
+      transition: all 0.3s ease;
+      cursor: default;
+      backdrop-filter: blur(5px);
+    }
+    
+    /* Hover effect for tech badges */
+    .tech-badge:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 102, 0, 0.2);
+      background: linear-gradient(135deg, rgba(255, 102, 0, 0.3), rgba(255, 102, 0, 0.2));
+      border-color: rgba(255, 102, 0, 0.5);
+    }
+    
+    /* Server status indicator */
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1rem;
+      color: #00ff88;
+      font-weight: 500;
+    }
+    
+    /* Animated status dot */
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      background: #00ff88;
+      border-radius: 50%;
+      animation: statusPulse 2s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+    }
+    
+    /* Keyframe animations for various effects */
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 20px rgba(255, 102, 0, 0.5); }
+      100% { text-shadow: 0 0 40px rgba(255, 102, 0, 0.8), 0 0 60px rgba(255, 102, 0, 0.3); }
+    }
+    
+    @keyframes containerFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes backgroundPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+    
+    @keyframes statusPulse {
+      0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% { 
+        transform: scale(1.2);
+        opacity: 0.8;
+      }
+    }
+    
+    /* Responsive design for mobile devices */
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 20px;
+        margin: 20px;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .tech-stack {
+        gap: 10px;
+      }
+      
+      .tech-badge {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+      }
+    }
+    
+    /* Additional glow effects for enhanced visual appeal */
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #ff6600, #ff8833, #ff6600, #ff8833);
+      border-radius: 22px;
+      z-index: -1;
+      opacity: 0;
+      animation: borderGlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes borderGlow {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Enhanced HTML structure with semantic elements -->
+  <div class="container">
+    <h1>🔥 Welcome to My Apache Web Server</h1>
+    <p class="subtitle">Powered by Modern Technology Stack</p>
+    
+    <!-- Technology stack badges showing the tech used -->
+    <div class="tech-stack">
+      <div class="tech-badge">🐧 Linux</div>
+      <div class="tech-badge">🐳 Docker</div>
+      <div class="tech-badge">⚡ Apache</div>
+      <div class="tech-badge">🌐 Web Server</div>
+    </div>
+    
+    <!-- Server status indicator -->
+    <div class="status">
+      <div class="status-dot"></div>
+      <span>Server Status: Online & Ready</span>
+    </div>
+  </div>
+</body>
+</html>

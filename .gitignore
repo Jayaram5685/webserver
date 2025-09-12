@@ -1,0 +1,29 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.class
+
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+
+# Python envs
+.venv/
+env/
+venv/
+
+# Docker
+**/.dockerignore
+**/docker_build/
+**/docker_build_context/
+
+# Editors
+.vscode/
+.cursor/
+.idea/
+
+# Logs
+*.log
+
